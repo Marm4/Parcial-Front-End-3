@@ -2,34 +2,42 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Card from './card'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [nombre, setNombre] = useState('')
+  const [telefono, setTelefono] = useState(0)
+  const [error, setError] = useState('');
+  const [submittedData, setSubmittedData] = useState(null);
+
+  const handleChangeNombre = (event) => setNombre(event.target.value.trim())
+
+  const handleChangeTelefono = (event) => setTelefono(event.target.value.trim())
+
+  const handleSendData = () => {
+    if(nombre.length>=3 && telefono.length>=6){
+      setError('');
+      setSubmittedData({nombre, telefono});
+    } else {
+      setError('Por favor chequea que la información sea correcta');
+      setSubmittedData(null);
+    }
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <h1>Ingrese nombre y numero de telefono</h1>
+        <form name="form" onSubmit={handleSendData}>
+          <input type="text" placeholder='Ingrese su nombre' onChange={handleChangeNombre}/>
+          <input type="number" placeholder='Ingrese su numero de telefono' onChange={handleChangeTelefono}/>
+
+          <button type="button" onClick={handleSendData}>Enviar</button>
+          
+          {error && <p>{error}</p>}
+        </form>     
+        {submittedData && <Card data={submittedData}/>}
+    </div>
+  );
 }
 
-export default App
+export default App;

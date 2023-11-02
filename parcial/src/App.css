@@ -37,6 +37,33 @@
   padding: 2em;
 }
 
+.card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin: 50px 300px 10px 300px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px 500px 10px 500px;
+}
+
+button{
+  
+}
+
+input{
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+
 .read-the-docs {
   color: #888;
 }
